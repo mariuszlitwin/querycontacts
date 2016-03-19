@@ -1,3 +1,6 @@
+import sys
+(python_ver, _, _, _, _) = sys.version_info
+
 import os
 from setuptools import setup, find_packages
 
@@ -12,8 +15,8 @@ with open('%s/querycontacts/_version.py' % (cur_dir), 'r') as vfh:
 
 with open('%s/README.rst' % cur_dir, 'r') as f:
     long_description = f.read()
-
-with open('%s/requirements.txt' % cur_dir) as f:
+    
+with open('%s/REQUIREMENTS%s' % (cur_dir, python_ver)) as f:
     requires = f.readlines()
 
 setup(

@@ -13,6 +13,7 @@ License: GPLv3
 import argparse
 import sys
 from querycontacts import ContactFinder, __version__
+from __future__ import print_function
 
 def main():
     parser = argparse.ArgumentParser(

@@ -7,11 +7,16 @@ Author: abusix GmbH
 License: GPLv3
 
 '''
+import sys
+(python_ver, _, _, _, _) = sys.version_info
 
 from dns import resolver
 from dns.reversename import from_address as reversename
 from dns.name import from_text as dnsname
-import ipaddress
+if python_ver == 3:
+    import ipaddress
+else:
+    import ipaddr
 from ._version import __version__
 
 
@@ -54,7 +59,11 @@ class ContactFinder(object):
 
         :raises: :py:class:`ValueError`: if ip is not properly formatted
         '''
-        ip = ipaddress.ip_address(ip)
+        ip = None
+        if python_ver == 3:
+            ip = ipaddress.ip_address(ip)
+        else:
+            ip = ipaddr.IPAddress(ip)
         rev = reversename(ip.exploded)
         revip, _ = rev.split(3)
         lookup = revip.concatenate(self.provider).to_text()
