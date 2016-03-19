@@ -7,7 +7,8 @@ long_description = description
 cur_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Read Version
-execfile('%s/querycontacts/_version.py' % (cur_dir))
+with open('%s/querycontacts/_version.py' % (cur_dir), 'r') as vfh:
+    __version__ = vfh.read().strip().strip('\'').split(' = ')[1]
 
 with open('%s/README.rst' % cur_dir, 'r') as f:
     long_description = f.read()
